@@ -3,6 +3,6 @@ import { createPaymentIntent } from '../controllers/payment.controller.js';
 
 const router = express.Router();
 
-router.post('/create-intent', createPaymentIntent);
+router.post('/create-payment-intent', createPaymentIntent);
 
 export default router;
