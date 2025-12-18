@@ -1,7 +1,11 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import testRoutes from "./routes/test.routes.js";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+
+import scholarshipRoutes from './routes/scholarship.routes.js';
+import applicationRoutes from './routes/application.routes.js';
+import paymentRoutes from './routes/payment.routes.js';
 
 dotenv.config();
 const app = express();
@@ -9,10 +13,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/test", testRoutes);
+// DB
+connectDB();
 
-app.get("/", (req, res) => {
-  res.send("ScholarStream Server Running 🚀");
+// Routes
+app.use('/api/scholarships', scholarshipRoutes);
+app.use('/api/applications', applicationRoutes);
+app.use('/api/payments', paymentRoutes);
+
+app.get('/', (req, res) => {
+  res.send('ScholarStream Server Running');
 });
 
 const port = process.env.PORT || 5000;
